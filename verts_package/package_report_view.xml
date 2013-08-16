@@ -1,0 +1,17 @@
+<openerp>
+	<data>
+        <report id="package_invoice_id" 
+            model="account.invoice" 
+            name="package_invoice_reports" 
+            rml="verts_package/package_invoice.rml"
+            string="Package Invoice "
+            auto="False">
+        </report>
+	 	<report id="report_preview_picking_list_id" 
+	 	     model="stock.picking.out"
+	 	     name="stock.picking.package_list" 
+	 	     string="Package List" 
+	 	     rml="verts_package/package_preview.rml"/>
+</data>
+</openerp>
+		

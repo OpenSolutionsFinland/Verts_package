@@ -1,0 +1,104 @@
+<openerp>
+	<data>
+	
+	  <record id="verts_product_normal_form_view" model="ir.ui.view">
+            <field name="name">product.normal.form.inherit</field>
+            <field name="model">product.product</field>
+			<field name="inherit_id" ref="product.product_normal_form_view"/> 
+            <field name="arch" type="xml">
+              <data>
+                   <field name="default_code" position="after">
+                       <field name="custom_code"/>
+                   </field>    
+			  </data>	     
+            </field>
+        </record>
+        
+	  <record id="verts_package_view" model="ir.ui.view">
+            <field name="name">sale.order.package.inherit</field>
+            <field name="model">sale.order</field>
+			<field name="inherit_id" ref="sale.view_order_form"/> 
+            <field name="arch" type="xml">
+              <data>
+                   <page string="Other Information" position="after">
+                     <page string="Package List">
+                        <field name="package_list_lines" readonly="1">
+						  <tree string="Package List" colors="red:name=='Total';">
+                             <field name="name"/>
+                             <field name="product_qty" sum="Total Product Qty"/>
+                             <field name="pallet" sum="Total Pallet"/>
+                             <field name="tray" sum="Total Tray"/>
+                             <field name="can" sum="Total Can"/>
+                             <field name="net_weight" sum="Total Net Weight"/>
+                             <field name="grass_weight" sum="Total Gross Weight"/>
+                          </tree>	
+				        </field>
+				        <button name="generate_packing_list" states="draft" string="Generate Packing List" type="object" class="oe_edit_only oe_link" />			       
+				      </page> 
+                   </page> 
+                   <field name="client_order_ref" position="after">
+                       <field name="trademark"/>
+                   </field>    
+			  </data>	     
+            </field>
+        </record>
+        <record id="verts_package_view_picking_out_form" model="ir.ui.view">
+            <field name="name">stock.picking.out.form.package.inherit</field>
+            <field name="model">stock.picking.out</field>
+			<field name="inherit_id" ref="stock.view_picking_out_form"/> 
+            <field name="arch" type="xml">
+              <data>
+                   <field name="date" position="after">
+                      <field name="sale_id" invisible="1"/>
+                   </field>    
+                   <page string="Additional Info" position="after">
+                     <page string="Package List">
+                        <field name="package_list_lines" readonly="1">
+						  <tree string="Package List" colors="red:name=='Total';">
+                             <field name="name"/>
+                             <field name="product_qty" sum="Total Product Qty"/>
+                             <field name="pallet" sum="Total Pallet"/>
+                             <field name="tray" sum="Total Tray"/>
+                             <field name="can" sum="Total Can"/>
+                             <field name="net_weight" sum="Total Net Weight"/>
+                             <field name="grass_weight" sum="Total Gross Weight"/>
+                          </tree>	
+				        </field>
+				        <button name="generate_packing_list" states="draft" string="Generate Packing List" type="object" class="oe_edit_only oe_link" attrs="{'invisible': [('sale_id','!=',False)]}"/>			       
+				     </page>  
+                   </page>
+			  </data>	     
+            </field>
+        </record>
+        
+        <record id="verts_package_invoice_form" model="ir.ui.view">
+            <field name="name">account.invoice.form.package.inherit</field>
+            <field name="model">account.invoice</field>
+			<field name="inherit_id" ref="account.invoice_form"/> 
+            <field name="arch" type="xml">
+              <data>
+                   <field name="date_due" position="after">
+                       <field name="sale_id" invisible="1"/>
+                   </field>    
+                   <page string="Payments" position="after">
+                     <page string="Package List">
+                        <field name="package_list_lines" readonly="1">
+						  <tree string="Package List" colors="red:name=='Total';">
+                             <field name="name"/>
+                             <field name="product_qty" sum="Total Product Qty"/>
+                             <field name="pallet" sum="Total Pallet"/>
+                             <field name="tray" sum="Total Tray"/>
+                             <field name="can" sum="Total Can"/>
+                             <field name="net_weight" sum="Total Net Weight"/>
+                             <field name="grass_weight" sum="Total Gross Weight"/>
+                          </tree>	
+				        </field>
+				        <button name="generate_packing_list"  string="Generate Packing List" type="object"  class="oe_edit_only oe_link" attrs="{'invisible': [('sale_id','!=',False)]}"/>			       
+				     </page>  
+                   </page> 
+			  </data>	     
+            </field>
+        </record>
+</data>
+</openerp>
+		
